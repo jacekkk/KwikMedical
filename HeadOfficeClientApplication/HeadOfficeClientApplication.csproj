@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C8A3CE2A-5B46-4C23-B269-B3333AAAD0D2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>HeadOfficeClientApplication</RootNamespace>
+    <AssemblyName>HeadOfficeClientApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connected Services\CalloutServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\HospitalServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\PatientServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="FindPatientForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FindPatientForm.Designer.cs">
+      <DependentUpon>FindPatientForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AmbulanceRequestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AmbulanceRequestForm.Designer.cs">
+      <DependentUpon>AmbulanceRequestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PatientDetailsPopoup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientDetailsPopoup.Designer.cs">
+      <DependentUpon>PatientDetailsPopoup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FindPatientForm.resx">
+      <DependentUpon>FindPatientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AmbulanceRequestForm.resx">
+      <DependentUpon>AmbulanceRequestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatientDetailsPopoup.resx">
+      <DependentUpon>PatientDetailsPopoup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Connected Services\CalloutServiceReference\CallOutService.wsdl" />
+    <None Include="Connected Services\CalloutServiceReference\CallOutService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CalloutServiceReference\CallOutService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CalloutServiceReference\CallOutService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CalloutServiceReference\HeadOfficeClientApplication.CalloutServiceReference.CallOutDataContract.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HospitalServiceReference\HeadOfficeClientApplication.HospitalServiceReference.HospitalDataContract.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HospitalServiceReference\HospitalService.wsdl" />
+    <None Include="Connected Services\HospitalServiceReference\HospitalService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\HospitalServiceReference\HospitalService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\HospitalServiceReference\HospitalService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PatientServiceReference\HeadOfficeClientApplication.PatientServiceReference.PatientDataContract.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PatientServiceReference\PatientService.wsdl" />
+    <None Include="Connected Services\PatientServiceReference\PatientService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PatientServiceReference\PatientService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PatientServiceReference\PatientService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\AmbulanceClientApp.CallOutServiceReference.CallOutDataContract.datasource" />
+    <None Include="Properties\DataSources\AmbulanceClientApp.HospitalServiceReference.HospitalDataContract.datasource" />
+    <None Include="Properties\DataSources\AmbulanceClientApp.PatientServiceReference.PatientDataContract.datasource" />
+    <None Include="Properties\DataSources\AmbulanceClientApp.PatientServiceReference.PatientDataContract1.datasource" />
+    <None Include="Properties\DataSources\AmbulanceClientApp.PatientServiceReference.PatientDataContract2.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AmbulanceClientApp\AmbulanceClientApp.csproj">
+      <Project>{92B397DE-D5DA-4C4F-BA75-F514A3A73427}</Project>
+      <Name>AmbulanceClientApp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\CalloutServiceReference\" />
+    <WCFMetadataStorage Include="Connected Services\HospitalServiceReference\" />
+    <WCFMetadataStorage Include="Connected Services\PatientServiceReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PatientServiceReference\PatientService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PatientServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PatientServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PatientServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CalloutServiceReference\CallOutService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CalloutServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CalloutServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\CalloutServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\HospitalServiceReference\HospitalService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\HospitalServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\HospitalServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\HospitalServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

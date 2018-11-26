@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="kwik_medicalModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="call_outs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patient_id" Type="int" Nullable="false" />
+          <Property Name="hospital_id" Type="int" Nullable="false" />
+          <Property Name="date" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="reason" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="action_taken" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="time_spent" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="patients">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="insurance_number" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="regional_hospital_id" Type="int" Nullable="false" />
+          <Property Name="medical_conditions" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="regional_hospitals">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hospital_name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone_number" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_hospital_id">
+          <End Role="regional_hospitals" Type="Self.regional_hospitals" Multiplicity="1" />
+          <End Role="patients" Type="Self.patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="regional_hospitals">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="patients">
+              <PropertyRef Name="regional_hospital_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_patient_id">
+          <End Role="patients" Type="Self.patients" Multiplicity="1" />
+          <End Role="call_outs" Type="Self.call_outs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="call_outs">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_regional_hospital_id">
+          <End Role="regional_hospitals" Type="Self.regional_hospitals" Multiplicity="1" />
+          <End Role="call_outs" Type="Self.call_outs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="regional_hospitals">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="call_outs">
+              <PropertyRef Name="hospital_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="kwik_medicalModelStoreContainer">
+          <EntitySet Name="call_outs" EntityType="Self.call_outs" Schema="kwik_medical" store:Type="Tables" />
+          <EntitySet Name="patients" EntityType="Self.patients" Schema="kwik_medical" store:Type="Tables" />
+          <EntitySet Name="regional_hospitals" EntityType="Self.regional_hospitals" Schema="kwik_medical" store:Type="Tables" />
+          <AssociationSet Name="fk_hospital_id" Association="Self.fk_hospital_id">
+            <End Role="regional_hospitals" EntitySet="regional_hospitals" />
+            <End Role="patients" EntitySet="patients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_patient_id" Association="Self.fk_patient_id">
+            <End Role="patients" EntitySet="patients" />
+            <End Role="call_outs" EntitySet="call_outs" />
+          </AssociationSet>
+          <AssociationSet Name="fk_regional_hospital_id" Association="Self.fk_regional_hospital_id">
+            <End Role="regional_hospitals" EntitySet="regional_hospitals" />
+            <End Role="call_outs" EntitySet="call_outs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="kwik_medicalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="patient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="insurance_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="regional_hospital_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="regional_hospitals" Relationship="Self.fk_hospital_id" FromRole="patients" ToRole="regional_hospitals" />
+          <NavigationProperty Name="call_outs" Relationship="kwik_medicalModel.fk_patient_id" FromRole="patient" ToRole="call_outs" />
+          <Property Name="medical_conditions" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="regional_hospitals">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hospital_name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone_number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="patients" Relationship="Self.fk_hospital_id" FromRole="regional_hospitals" ToRole="patients" />
+          <NavigationProperty Name="call_outs" Relationship="kwik_medicalModel.fk_regional_hospital_id" FromRole="regional_hospitals" ToRole="call_outs" />
+        </EntityType>
+        <Association Name="fk_hospital_id">
+          <End Role="regional_hospitals" Type="Self.regional_hospitals" Multiplicity="1" />
+          <End Role="patients" Type="Self.patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="regional_hospitals">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="patients">
+              <PropertyRef Name="regional_hospital_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="kwik_medicalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="patients" EntityType="Self.patient" />
+          <EntitySet Name="regional_hospitals" EntityType="Self.regional_hospitals" />
+          <AssociationSet Name="fk_hospital_id" Association="Self.fk_hospital_id">
+            <End Role="regional_hospitals" EntitySet="regional_hospitals" />
+            <End Role="patients" EntitySet="patients" />
+          </AssociationSet>
+          <EntitySet Name="call_outs" EntityType="kwik_medicalModel.call_outs" />
+          <AssociationSet Name="fk_patient_id" Association="kwik_medicalModel.fk_patient_id">
+            <End Role="patient" EntitySet="patients" />
+            <End Role="call_outs" EntitySet="call_outs" />
+          </AssociationSet>
+          <AssociationSet Name="fk_regional_hospital_id" Association="kwik_medicalModel.fk_regional_hospital_id">
+            <End Role="regional_hospitals" EntitySet="regional_hospitals" />
+            <End Role="call_outs" EntitySet="call_outs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="call_outs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patient_id" Type="Int32" Nullable="false" />
+          <Property Name="hospital_id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="patient" Relationship="kwik_medicalModel.fk_patient_id" FromRole="call_outs" ToRole="patient" />
+          <NavigationProperty Name="regional_hospitals" Relationship="kwik_medicalModel.fk_regional_hospital_id" FromRole="call_outs" ToRole="regional_hospitals" />
+          <Property Name="reason" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="action_taken" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="time_spent" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="fk_patient_id">
+          <End Type="kwik_medicalModel.patient" Role="patient" Multiplicity="1" />
+          <End Type="kwik_medicalModel.call_outs" Role="call_outs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patient">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="call_outs">
+              <PropertyRef Name="patient_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_regional_hospital_id">
+          <End Type="kwik_medicalModel.regional_hospitals" Role="regional_hospitals" Multiplicity="1" />
+          <End Type="kwik_medicalModel.call_outs" Role="call_outs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="regional_hospitals">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="call_outs">
+              <PropertyRef Name="hospital_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="kwik_medicalModelStoreContainer" CdmEntityContainer="kwik_medicalEntities">
+          <EntitySetMapping Name="patients">
+            <EntityTypeMapping TypeName="kwik_medicalModel.patient">
+              <MappingFragment StoreEntitySet="patients">
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="medical_conditions" ColumnName="medical_conditions" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="insurance_number" ColumnName="insurance_number" />
+                <ScalarProperty Name="regional_hospital_id" ColumnName="regional_hospital_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="regional_hospitals">
+            <EntityTypeMapping TypeName="kwik_medicalModel.regional_hospitals">
+              <MappingFragment StoreEntitySet="regional_hospitals">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="hospital_name" ColumnName="hospital_name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="call_outs">
+            <EntityTypeMapping TypeName="kwik_medicalModel.call_outs">
+              <MappingFragment StoreEntitySet="call_outs">
+                <ScalarProperty Name="time_spent" ColumnName="time_spent" />
+                <ScalarProperty Name="action_taken" ColumnName="action_taken" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="hospital_id" ColumnName="hospital_id" />
+                <ScalarProperty Name="patient_id" ColumnName="patient_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

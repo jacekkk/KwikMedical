@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="444f3660-a75a-4246-8e36-85793d1e3cd2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:60227/CallOutService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CallOutService.xsd" MetadataType="Schema" ID="5a0bca91-fd4e-4d77-8a63-ec10d7ffc557" SourceId="1" SourceUrl="http://localhost:60227/CallOutService.svc?xsd=xsd1" />
+    <MetadataFile FileName="CallOutService.disco" MetadataType="Disco" ID="2699763b-6f6b-4967-918c-23bc9de184b5" SourceId="1" SourceUrl="http://localhost:60227/CallOutService.svc?disco" />
+    <MetadataFile FileName="CallOutService1.xsd" MetadataType="Schema" ID="bad594bf-0e1a-4524-9d92-bbdd7a893c86" SourceId="1" SourceUrl="http://localhost:60227/CallOutService.svc?xsd=xsd0" />
+    <MetadataFile FileName="CallOutService.wsdl" MetadataType="Wsdl" ID="71701132-9f0b-4e33-97f0-889b075b329a" SourceId="1" SourceUrl="http://localhost:60227/CallOutService.svc?wsdl" />
+    <MetadataFile FileName="CallOutService2.xsd" MetadataType="Schema" ID="84aa27a7-80be-48f6-a129-493fadf54b19" SourceId="1" SourceUrl="http://localhost:60227/CallOutService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
